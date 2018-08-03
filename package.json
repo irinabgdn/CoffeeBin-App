@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "escape-string-regexp": "^1.0.5",
     "google-map-react": "^1.0.5",
+    "hamburgers": "^0.9.3",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4"
+    "react-foursquare": "^1.0.3",
+    "react-scripts": "1.1.4",
+    "sort-by": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
