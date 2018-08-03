@@ -68,8 +68,9 @@ class App extends Component {
 
   toggleInfo = (venue) => {
     this.setState({
-      selectedVenue: venue
+      selectedVenue: venue,
     })
+    console.log(this.state.selectedVenue)
   }
 
   updateFilter = (query) => {
@@ -81,7 +82,7 @@ class App extends Component {
             filteredVenues: sorted
         })
         
-        console.log(this.props.venues)
+        console.log(this.state.filteredVenues)
     } else {
         this.setState({
             query: "",
@@ -103,6 +104,7 @@ class App extends Component {
           toggleInfo = {this.toggleInfo}
         />
         <Map
+          isMarkerShown
           venues = {this.state.filteredVenues}
           location = {this.state.location}
           selectedVenue = {this.state.selectedVenue}

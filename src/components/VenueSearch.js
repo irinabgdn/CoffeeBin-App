@@ -7,16 +7,6 @@ import VenuesList from '../components/VenuesList';
 // import VenueErrorBoundary from './components/VenueErrorBoundary'
 
 class VenueSearch extends Component {
-    // constructor()
-
-    static propTypes = {
-        venues: PropTypes.array.isRequired,
-        filteredVenues: PropTypes.array.isRequired,
-        query: PropTypes.string.isRequired,
-        updateFilter: PropTypes.func.isRequired,
-        toggleInfo: PropTypes.func.isRequired
-    }
-
 
     render() {
         return (
@@ -41,6 +31,13 @@ class VenueSearch extends Component {
             </nav>
         )
     }
+}
+VenueSearch.propTypes = {
+    venues: PropTypes.array.isRequired,
+    filteredVenues: PropTypes.array.isRequired,
+    query: PropTypes.string.isRequired,
+    updateFilter: PropTypes.func.isRequired,
+    toggleInfo: PropTypes.func.isRequired
 }
 
 export default VenueSearch

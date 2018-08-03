@@ -29,9 +29,11 @@ const Map = compose(
 
         {props.isMarkerShown && props.venues.map(venue => {
             return (                
-                <Marker key={venue.id}
-                    position={{lat: venue.location.lat, lng: venue.location.lng}}
+                <Marker 
+                    key={venue.id}
+                    position={{lat: Number(venue.location.lat), lng: Number(venue.location.lng)}}
                     title={venue.name}
+                    // animation= {google.maps.Animation.DROP}
                     onClick={() => props.toggleInfo(venue)}
                 >
                 
@@ -41,7 +43,8 @@ const Map = compose(
 
                         <div className="info-window" tabIndex="0">
                             <h1>{venue.name}</h1>
-                            <p>{venue.description}</p> 
+                            <p>{venue.description}</p>
+                            <p>{venue.location.address}</p>
                         </div>
                     </InfoWindow>
                 }
