@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
+
 // import logo from './logo.svg'
 import Header from './components/Header'
 import Map from './components/Map'
@@ -17,12 +21,13 @@ class App extends Component {
   state = {
     // Default address
     location: {lat: 46.7697071, lng: 23.5828261}, 
-    zoom: 14.5,
+    defaultZoom: 14.5,
 
     // Venues lists
     venues: [],
     filteredVenues: [],
     selectedVenue: {},
+    query: "",
 
     // Catch errors
     venuesError: false,
@@ -54,24 +59,37 @@ class App extends Component {
         })
       })
     }).catch(error => {return this.setState({venuesError: true})})
-    
-    // Set venues ids
-    let i=0
-    this.state.venues.foreach(venue => {
-      venue.id = i
-      i++
-    })
+ 
   }
 
   updateLocation = () => {
     this.getVenues(this.state.location)
   }
 
-  toggleInfo = (item) => {
+  toggleInfo = (venue) => {
     this.setState({
-      venue: item
+      selectedVenue: venue
     })
   }
+
+  updateFilter = (query) => {
+    if (query) {
+        this.setState({ query })
+        const match = new RegExp(escapeRegExp(query), 'i')
+        let sorted = this.state.venues.filter(venue => match.test(venue.name)).sort(sortBy('name'))
+        this.setState({
+            filteredVenues: sorted
+        })
+        
+        console.log(this.props.venues)
+    } else {
+        this.setState({
+            query: "",
+            filteredVenues: this.state.venues
+        })
+    }
+}
+
 
   render() {
     return (
@@ -80,12 +98,16 @@ class App extends Component {
         <VenueSearch
           venues = {this.state.venues}
           filteredVenues = {this.state.filteredVenues}
+          query = {this.state.query}
+          updateFilter = {this.updateFilter}
           toggleInfo = {this.toggleInfo}
         />
         <Map
-          venues = {this.state.venues}
+          venues = {this.state.filteredVenues}
           location = {this.state.location}
           selectedVenue = {this.state.selectedVenue}
+          zoom = {this.state.defaultZoom}
+          toggleInfo = {this.toggleInfo}
         />
       </div>
     )

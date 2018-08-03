@@ -1,38 +1,22 @@
 import React, { Component } from 'react'
 
-import sortBy from 'sort-by'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
 
-import VenuesList from './components/VenuesList'
+import VenuesList from '../components/VenuesList';
 
 // import VenueErrorBoundary from './components/VenueErrorBoundary'
 
 class VenueSearch extends Component {
-    state = {
-        query: ""
-    }
+    // constructor()
 
     static propTypes = {
         venues: PropTypes.array.isRequired,
-        filteredVenues: PropTypes.array.isRequired
+        filteredVenues: PropTypes.array.isRequired,
+        query: PropTypes.string.isRequired,
+        updateFilter: PropTypes.func.isRequired,
+        toggleInfo: PropTypes.func.isRequired
     }
 
-    updateFilter = (query) => {
-        if (query) {
-            this.setState({ query })
-            const match = new RegExp(escapeRegExp(query), 'i')
-
-            this.setState({
-                filteredVenues: this.state.venues.filter(venue => match.test(venue.name).sort(sortBy('name')))
-            })
-        } else {
-            this.setState({
-                query: "",
-                filteredVenues: this.state.venues
-            })
-        }
-    }
 
     render() {
         return (
@@ -44,16 +28,15 @@ class VenueSearch extends Component {
                         className="filter-input"
                         name="filter"
                         placeholder="Filter cafés"
-                        value= {this.state.query}
-                        onChange= {(e) => this.updateFilter(e.target.value)}
+                        value= {this.props.query}
+                        onChange= {(e) => this.props.updateFilter(e.target.value)}
                     />
                 </div>
                 {/* <VenueErrorBoundary venuesError={this.props.venuesError}> */}
-                <VenuesList 
-                    venues = {this.props.filteredVenues}
-                    updateFilter = {this.updateFilter}
-                    toggleInfo = {this.props.toggleInfo}
-                />
+                    <VenuesList
+                        venues = {this.props.filteredVenues}
+                        toggleInfo = {this.props.toggleInfo}
+                    />
                 {/* </VenueErrorBoundary> */}
             </nav>
         )

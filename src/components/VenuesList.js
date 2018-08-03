@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Venue from './components/Venue'
+import Venue from '../components/Venue'
 
-const VenuesList = (props) => {
+const VenuesList = (props) => (
     <div className="venue-list-container">
         <div className="venue-list-title">
             <h2>Your search results</h2>
@@ -21,13 +21,11 @@ const VenuesList = (props) => {
                 ))}
         </ul>
     </div>
-}
+)
 
 VenuesList.propTypes = {
     venues: PropTypes.arrayOf(PropTypes.object).isRequired,
-    updateFilter: PropTypes.func.isRequired,
-    toggleInfo: PropTypes.func.isRequired,
-
+    toggleInfo: PropTypes.func.isRequired
 }
 
 export default VenuesList
