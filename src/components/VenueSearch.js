@@ -12,11 +12,12 @@ class VenueSearch extends Component {
         return (
             <nav className="navigation">
                 <div role="search">
-                    <label htmlFor="filter">Filter cafés</label>
+                    <label htmlFor="cafe-filter">Filter cafés</label>
                     <input 
                         type="text"
-                        className="filter-input"
-                        name="filter"
+                        className="cafe-filter-input"
+                        name="cafe-filter"
+                        tabIndex="1"
                         placeholder="Filter cafés"
                         value= {this.props.query}
                         onChange= {(e) => this.props.updateFilter(e.target.value)}

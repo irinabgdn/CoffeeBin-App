@@ -9,8 +9,9 @@ import Map from './components/Map'
 import VenueSearch from './components/VenueSearch'
 
 import './App.css'
+import AddressSearch from './components/AddressSearch';
 
-// Insert here your Foursquare API keys
+// Insert here your Foursquare API key
 const foursquare = require('react-foursquare')({
   clientID: 'VQEYYWX5BH511OPRHTBCKV5XCRXUHWI3UY5IVRZTZQ3XTDQO',
   clientSecret: '2FPVGCFNUYX3KJUVSYC2UZABT2RYUFUSYPJV1BQYFUVS3LBW'
@@ -20,8 +21,8 @@ const foursquare = require('react-foursquare')({
 class App extends Component {
   state = {
     // Default address
-    location: {lat: 46.7697071, lng: 23.5828261}, 
-    defaultZoom: 14.5,
+    location: {lat: 52.5272422, lng: 13.370466},
+    defaultZoom: 14,
 
     // Venues lists
     venues: [],
@@ -31,13 +32,61 @@ class App extends Component {
 
     // Catch errors
     venuesError: false,
+    addressError: false,
     mapsError: false
   }
-  
-  componentDidMount() {
-    this.getVenues(this.state.location);
+
+    
+  componentWillMount() {
+    this.getLocation()
   }
   
+
+  // Get user's location from geolocation
+  getLocation = () => {
+    // Check if geolocation is supported/enabled on current browser
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // // for when getting location is a success
+            this.setState({
+              location: {lat: Number(position.coords.latitude), lng: Number(position.coords.longitude)}
+            })
+
+            // Get venues based on user's location
+            this.getVenues(this.state.location)
+          },
+          (error_message) => {
+            // If getting location results in an error
+            console.error('An error has occured while retrieving location', error_message)
+            
+            // Get venues based on default location
+            this.getVenues(this.state.location)
+          }
+      );
+    
+    // If geolocation is not supported
+    } else {
+      console.log('Geolocation is not enabled on this browser')
+      
+      // Get venues based on default location
+      this.getVenues(this.state.location)
+    }
+  }
+  
+
+  // Clear venues array
+  clearVenues = () => {
+    this.setState({
+      venues: []
+    })
+  }
+  
+
+  /* Method to fetch venues from foursquare
+  * @params {object} {lat, lng} location  - default location, user's location 
+  * or selected address from user's input (AddressSearch.js)
+  */
   getVenues = (location) => {
     // Set parameters to use in the Foursquare API call.
     const params = {
@@ -46,8 +95,11 @@ class App extends Component {
       // Search for cafes
       'section': 'coffee',
       // Get maximum 30 locations
-      'limit': 30
+      'limit': 5
     }
+
+    // Clear venues array
+    this.clearVenues()
 
     // Get venues from Foursquare
     foursquare.venues.explore(params)
@@ -59,43 +111,68 @@ class App extends Component {
         })
       })
     }).catch(error => {return this.setState({venuesError: true})})
- 
   }
 
-  updateLocation = () => {
+
+  /* Update new location from user input
+  * @params {object} {lat, lng} address - selected address 
+  * from user's input (AddressSearch.js)
+  */
+  updateLocation = (address) => {
+    this.setState({ 
+      location: address
+    })
+
+    // Clear venue list
+    this.clearVenues()
+
+    // Generate venue list for the new location
     this.getVenues(this.state.location)
   }
 
+
+  /* Show infowindow for the selected location
+  * @params {object} venue - selected venue from user's 
+  * input (VenueSearch.js)
+  */
   toggleInfo = (venue) => {
     this.setState({
       selectedVenue: venue,
     })
-    console.log(this.state.selectedVenue)
   }
 
+
+  /* Filter venues list on user's input
+  * @params {string} query - user's input (VenueSearch.js)
+  */ 
   updateFilter = (query) => {
     if (query) {
         this.setState({ query })
         const match = new RegExp(escapeRegExp(query), 'i')
-        let sorted = this.state.venues.filter(venue => match.test(venue.name)).sort(sortBy('name'))
+        // Alphabetically sort venue list by name
+        let sortedVenueList = this.state.venues.filter(venue => match.test(venue.name)).sort(sortBy('name'))
         this.setState({
-            filteredVenues: sorted
+            filteredVenues: sortedVenueList
         })
-        
-        console.log(this.state.filteredVenues)
     } else {
         this.setState({
             query: "",
             filteredVenues: this.state.venues
         })
     }
-}
+  }
 
 
   render() {
     return (
       <div className="App">
         <Header/>
+        
+        <AddressSearch 
+          location = {this.state.location}
+          updateLocation = {this.updateLocation}
+        />
+
         <VenueSearch
           venues = {this.state.venues}
           filteredVenues = {this.state.filteredVenues}
@@ -103,6 +180,7 @@ class App extends Component {
           updateFilter = {this.updateFilter}
           toggleInfo = {this.toggleInfo}
         />
+
         <Map
           isMarkerShown
           venues = {this.state.filteredVenues}
@@ -111,6 +189,8 @@ class App extends Component {
           zoom = {this.state.defaultZoom}
           toggleInfo = {this.toggleInfo}
         />
+
+        {/* <Footer /> */}
       </div>
     )
   }

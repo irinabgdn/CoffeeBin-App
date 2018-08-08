@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Venue = (props) => (
+const Venue =  props => 
     <div className="venue-name"
-        onClick = {() => props.toggleInfo(props.venue)}
+            onClick = {() => props.toggleInfo(props.venue)}
         tabIndex = "0">
-        <p>{props.venue.name}</p>
-    </div>   
-
-)
+        <h3>{props.venue.name}</h3>
+        <p>{props.venue.description}</p>
+    </div>
 
 Venue.propTypes = {
     venue: PropTypes.object.isRequired,
