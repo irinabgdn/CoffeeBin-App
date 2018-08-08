@@ -3,19 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.4.3",
     "escape-string-regexp": "^1.0.5",
-    "foursquarevenues": "^3.0.1",
-    "hamburgers": "^0.9.3",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-foursquare": "^1.0.3",
     "react-geosuggest": "^2.8.0",
     "react-google-maps": "^9.4.5",
-    "react-places-autocomplete": "^7.2.0",
     "react-scripts": "1.1.4",
-    "recompose": "^0.28.1",
-    "sort-by": "^1.2.0"
+    "recompose": "^0.28.2",
+    "sort-by": "^1.2.0",
+    "webpack": "^4.16.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,5 +22,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack-cli": "^3.1.0"
+  }
 }

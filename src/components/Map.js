@@ -43,7 +43,7 @@ const Map = compose(
                 {props.selectedVenue.id === venue.id &&
                     <InfoWindow
                         onCloseClick={() => props.toggleInfo(venue)}>
-
+                       
                         <div className="info-window" tabIndex="0">
                             <h1>{venue.name}</h1>
                             <p>{venue.description}</p>

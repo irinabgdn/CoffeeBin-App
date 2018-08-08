@@ -9,7 +9,7 @@ import Sidebar from './components/Sidebar'
 import MapErrorBoundary from './components/MapErrorBoundary'
 import Map from './components/Map'
 
-import './App.css'
+import './css/App.css'
 
 // Insert here your Foursquare API key
 const foursquare = require('react-foursquare')({
@@ -97,6 +97,7 @@ class App extends Component {
       'section': 'coffee',
       // Get maximum 30 locations
       'limit': 25,
+      venuePhotos: 1
     }
 
     // Clear venues array
