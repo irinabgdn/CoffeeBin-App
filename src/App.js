@@ -6,10 +6,9 @@ import sortBy from 'sort-by'
 // import logo from './logo.svg'
 import Header from './components/Header'
 import Map from './components/Map'
-import VenueSearch from './components/VenueSearch'
+import Sidebar from './components/Sidebar'
 
 import './App.css'
-import AddressSearch from './components/AddressSearch';
 
 // Insert here your Foursquare API key
 const foursquare = require('react-foursquare')({
@@ -95,7 +94,7 @@ class App extends Component {
       // Search for cafes
       'section': 'coffee',
       // Get maximum 30 locations
-      'limit': 5
+      'limit': 25
     }
 
     // Clear venues array
@@ -168,17 +167,17 @@ class App extends Component {
       <div className="App">
         <Header/>
         
-        <AddressSearch 
+        <Sidebar
           location = {this.state.location}
           updateLocation = {this.updateLocation}
-        />
-
-        <VenueSearch
+          addressError = {this.state.addressError}
+                
           venues = {this.state.venues}
           filteredVenues = {this.state.filteredVenues}
           query = {this.state.query}
           updateFilter = {this.updateFilter}
           toggleInfo = {this.toggleInfo}
+          venuesError = {this.state.venuesError}
         />
 
         <Map
@@ -188,6 +187,7 @@ class App extends Component {
           selectedVenue = {this.state.selectedVenue}
           zoom = {this.state.defaultZoom}
           toggleInfo = {this.toggleInfo}
+          mapsError = {this.state.mapsError}
         />
 
         {/* <Footer /> */}
