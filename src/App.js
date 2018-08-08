@@ -5,8 +5,9 @@ import sortBy from 'sort-by'
 
 // import logo from './logo.svg'
 import Header from './components/Header'
-import Map from './components/Map'
 import Sidebar from './components/Sidebar'
+import MapErrorBoundary from './components/MapErrorBoundary'
+import Map from './components/Map'
 
 import './App.css'
 
@@ -179,16 +180,17 @@ class App extends Component {
           toggleInfo = {this.toggleInfo}
           venuesError = {this.state.venuesError}
         />
-
-        <Map
-          isMarkerShown
-          venues = {this.state.filteredVenues}
-          location = {this.state.location}
-          selectedVenue = {this.state.selectedVenue}
-          zoom = {this.state.defaultZoom}
-          toggleInfo = {this.toggleInfo}
-          mapsError = {this.state.mapsError}
-        />
+        <MapErrorBoundary mapsError = {this.state.mapsError}>
+          <Map
+            isMarkerShown
+            venues = {this.state.filteredVenues}
+            location = {this.state.location}
+            selectedVenue = {this.state.selectedVenue}
+            zoom = {this.state.defaultZoom}
+            toggleInfo = {this.toggleInfo}
+            mapsError = {this.state.mapsError}
+          />
+        </MapErrorBoundary>
 
         {/* <Footer /> */}
       </div>

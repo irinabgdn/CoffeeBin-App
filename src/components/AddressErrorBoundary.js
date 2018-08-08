@@ -21,8 +21,8 @@ class AddressErrorBoundary extends Component {
     showErrorMessage = () => {
         return (
             <div className="error-container">
-                <h1>Trouble getting the list of cafés...</h1>
-                <p>Did you add the Foursquare API credentials in App.js? If not, please do so. Else Foursquare is probably out of reach or your network connection is lost :(</p>
+                <h1>Trouble finding the city you're searching for..</h1>
+                <p>Did you add the Google Maps API credentials in App.js? If not, please do so. Else Google Maps is probably out of reach or your network connection is lost :(</p>
             </div>
         )
     }

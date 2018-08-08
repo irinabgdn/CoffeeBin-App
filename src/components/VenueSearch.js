@@ -1,44 +1,38 @@
-import React, { Component } from 'react'
-
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import VenuesList from '../components/VenuesList';
+import VenueErrorBoundary from '../components/VenueErrorBoundary'
+import VenuesList from '../components/VenuesList'
 
-// import VenueErrorBoundary from './components/VenueErrorBoundary'
+const VenueSearch = props =>
+    <nav className="navigation">
+        <div role="search">
+            <label htmlFor="cafe-filter">Filter cafés</label>
+            <input 
+                type="text"
+                className="cafe-filter-input"
+                name="cafe-filter"
+                tabIndex="1"
+                placeholder="Filter cafés"
+                value= {props.query}
+                onChange= {(e) => props.updateFilter(e.target.value)}
+            />
+        </div>
+        <VenueErrorBoundary venuesError={props.venuesError}>
+            <VenuesList
+                venues = {props.filteredVenues}
+                toggleInfo = {props.toggleInfo}
+            />
+        </VenueErrorBoundary>
+    </nav>
 
-class VenueSearch extends Component {
-
-    render() {
-        return (
-            <nav className="navigation">
-                <div role="search">
-                    <label htmlFor="cafe-filter">Filter cafés</label>
-                    <input 
-                        type="text"
-                        className="cafe-filter-input"
-                        name="cafe-filter"
-                        tabIndex="1"
-                        placeholder="Filter cafés"
-                        value= {this.props.query}
-                        onChange= {(e) => this.props.updateFilter(e.target.value)}
-                    />
-                </div>
-                {/* <VenueErrorBoundary venuesError={this.props.venuesError}> */}
-                    <VenuesList
-                        venues = {this.props.filteredVenues}
-                        toggleInfo = {this.props.toggleInfo}
-                    />
-                {/* </VenueErrorBoundary> */}
-            </nav>
-        )
-    }
-}
 VenueSearch.propTypes = {
     venues: PropTypes.array.isRequired,
     filteredVenues: PropTypes.array.isRequired,
     query: PropTypes.string.isRequired,
     updateFilter: PropTypes.func.isRequired,
-    toggleInfo: PropTypes.func.isRequired
+    toggleInfo: PropTypes.func.isRequired,
+    venuesError: PropTypes.bool.isRequired
 }
 
 export default VenueSearch
