@@ -78,7 +78,8 @@ class App extends Component {
   // Clear venues array
   clearVenues = () => {
     this.setState({
-      venues: []
+      venues: [],
+      filteredVenues: []
     })
   }
   
@@ -95,7 +96,7 @@ class App extends Component {
       // Search for cafes
       'section': 'coffee',
       // Get maximum 30 locations
-      'limit': 25
+      'limit': 25,
     }
 
     // Clear venues array

@@ -18,7 +18,6 @@ class AddressSearch extends Component {
                     placeholder="Search cities"
                     className="geo-suggest"
                     inputClassName="address-input"
-                    type={["(cities)"]}
                     label="Search cities"
                     id="addres-search"
                     onSuggestSelect= {(suggest) => {this.changeAddress(suggest)}}
