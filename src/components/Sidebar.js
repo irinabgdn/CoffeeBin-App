@@ -1,29 +1,40 @@
-import React from 'react'
+import React, { Component} from 'react';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
-import VenueSearch from '../components/VenueSearch'
-import AddressSearch from '../components/AddressSearch'
-import AddressErrorBoundary from '../components/AddressErrorBoundary'
+import VenueSearch from '../components/VenueSearch';
+import AddressSearch from '../components/AddressSearch';
+import AddressErrorBoundary from '../components/AddressErrorBoundary';
 
-const Sidebar = props => 
-    <nav className='sidebar-navigation'>
-        <AddressErrorBoundary addressError={props.addressError}>
-            <AddressSearch 
-                updateLocation = {props.updateLocation}
-            />
-        </AddressErrorBoundary>
-        <VenueSearch
-            venues = {props.venues}
-            filteredVenues = {props.filteredVenues}
-            query = {props.query}
-            updateFilter = {props.updateFilter}
-            toggleInfo = {props.toggleInfo}
-            venuesError = {props.venuesError}
-        />
-    </nav>
+class Sidebar extends Component { 
+    render() {
+        if (this.props.sidebarVisible) {
+            return (
+                <nav className='sidebar-navigation'>
+                    <AddressErrorBoundary addressError={this.props.addressError}>
+                        <AddressSearch 
+                            updateLocation = {this.props.updateLocation}
+                        />
+                    </AddressErrorBoundary>
+                    <VenueSearch
+                        venues = {this.props.venues}
+                        filteredVenues = {this.props.filteredVenues}
+                        query = {this.props.query}
+                        updateFilter = {this.props.updateFilter}
+                        toggleInfo = {this.props.toggleInfo}
+                        venuesError = {this.props.venuesError}
+                    />
+                </nav>
+            )
+        } else {
+            return null
+        }
+    }
+}
 
 Sidebar.proptypes = {
+    sidebarVisible: PropTypes.bool.isRequired,
+    
     addressError: PropTypes.bool.isRequired,
     updateLocation: PropTypes.func.isRequired,
 

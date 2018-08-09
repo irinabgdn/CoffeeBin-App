@@ -42,4 +42,8 @@
   font-size: 36px;
   color: #c9985e;
 }
+
+.header .btn:hover {
+  cursor: pointer;
+}
 /*# sourceMappingURL=App.css.map */

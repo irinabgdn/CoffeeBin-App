@@ -24,6 +24,9 @@ class App extends Component {
     location: {lat: 52.5272422, lng: 13.370466},
     defaultZoom: 14,
 
+    // Sidebar visibility
+    sidebarVisible: false,
+
     // Venues lists
     venues: [],
     filteredVenues: [],
@@ -38,7 +41,7 @@ class App extends Component {
 
     
   componentWillMount() {
-    this.getLocation()
+    this.getLocation();
   }
   
 
@@ -51,26 +54,26 @@ class App extends Component {
             // // for when getting location is a success
             this.setState({
               location: {lat: Number(position.coords.latitude), lng: Number(position.coords.longitude)}
-            })
+            });
 
             // Get venues based on user's location
-            this.getVenues(this.state.location)
+            this.getVenues(this.state.location);
           },
           (error_message) => {
             // If getting location results in an error
-            console.error('An error has occured while retrieving location', error_message)
+            console.error('An error has occured while retrieving location', error_message);
             
             // Get venues based on default location
-            this.getVenues(this.state.location)
+            this.getVenues(this.state.location);
           }
       );
     
     // If geolocation is not supported
     } else {
-      console.log('Geolocation is not enabled on this browser')
+      console.log('Geolocation is not enabled on this browser');
       
       // Get venues based on default location
-      this.getVenues(this.state.location)
+      this.getVenues(this.state.location);
     }
   }
   
@@ -101,7 +104,7 @@ class App extends Component {
     }
 
     // Clear venues array
-    this.clearVenues()
+    this.clearVenues();
 
     // Get venues from Foursquare
     foursquare.venues.explore(params)
@@ -112,7 +115,7 @@ class App extends Component {
           filteredVenues: this.state.filteredVenues.concat([item.venue])
         })
       })
-    }).catch(error => {return this.setState({venuesError: true})})
+    }).catch(error => {return this.setState({venuesError: true})});
   }
 
 
@@ -123,13 +126,13 @@ class App extends Component {
   updateLocation = (address) => {
     this.setState({ 
       location: address
-    })
+    });
 
     // Clear venue list
-    this.clearVenues()
+    this.clearVenues();
 
     // Generate venue list for the new location
-    this.getVenues(this.state.location)
+    this.getVenues(this.state.location);
   }
 
 
@@ -140,7 +143,7 @@ class App extends Component {
   toggleInfo = (venue) => {
     this.setState({
       selectedVenue: venue,
-    })
+    });
   }
 
 
@@ -155,22 +158,30 @@ class App extends Component {
         let sortedVenueList = this.state.venues.filter(venue => match.test(venue.name)).sort(sortBy('name'))
         this.setState({
             filteredVenues: sortedVenueList
-        })
+        });
     } else {
         this.setState({
             query: "",
             filteredVenues: this.state.venues
-        })
+        });
     }
   }
 
 
+  toggleSidebarVisibility = () => {
+    this.setState({ sidebarVisible: !this.state.sidebarVisible});
+  }
+
   render() {
     return (
       <div className="App">
-        <Header/>
+        <Header
+          toggleSidebarVisibility = {this.toggleSidebarVisibility}
+        />
         
         <Sidebar
+          sidebarVisible = {this.state.sidebarVisible}
+
           location = {this.state.location}
           updateLocation = {this.updateLocation}
           addressError = {this.state.addressError}
