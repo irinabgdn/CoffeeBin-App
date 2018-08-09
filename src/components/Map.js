@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import PropTypes from 'prop-types'
-import { compose, withProps } from "recompose"
+import PropTypes from 'prop-types';
+import { compose, withProps } from "recompose";
 import {
     withGoogleMap,
     GoogleMap,
     InfoWindow,
     Marker
-} from "react-google-maps"
+} from "react-google-maps";
 
 /*global google*/
 
@@ -20,7 +20,7 @@ const Map = compose(
     withGoogleMap
 )(props => (
     <GoogleMap 
-        defaultZoom={props.zoom} 
+        defaultZoom={props.zoom}
         center={props.location}
         onTilesLoaded={()=>{
             let map = document.querySelector('iframe')
@@ -66,4 +66,5 @@ Map.propTypes = {
     zoom: PropTypes.number.isRequired,
     toggleInfo: PropTypes.func.isRequired
 }
+
 export default Map
