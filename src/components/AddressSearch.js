@@ -1,14 +1,15 @@
 
-import React, { Component } from 'react'
-import Geosuggest from 'react-geosuggest'
+import React, { Component } from 'react';
+import Geosuggest from 'react-geosuggest';
 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
   
 class AddressSearch extends Component {
 
     changeAddress(suggest) {
-        console.log(this.props, suggest.location)
-        this.props.updateLocation(suggest.location)
+        if (suggest.location) {
+            this.props.updateLocation(suggest.location);
+        }
     }
 
     render() {
@@ -17,11 +18,15 @@ class AddressSearch extends Component {
                 <Geosuggest
                     placeholder="Search cities"
                     className="geo-suggest"
-                    inputClassName="address-input"
+                    inputClassName="search-input"
                     label="Search cities"
                     id="addres-search"
-                    onSuggestSelect= {(suggest) => {this.changeAddress(suggest)}}
+                    type="(cities)"
+                    onSuggestSelect= {(suggest) => {
+                        this.changeAddress(suggest)
+                    }}
                     changeAddress={this.props.changeAddress}
+                    toggleSidebar={this.props.toggleSidebar}
                 />
             </div>
         );

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // Catch errors from Geosuggest address search
 class AddressErrorBoundary extends Component {
@@ -29,9 +29,9 @@ class AddressErrorBoundary extends Component {
 
     render() {
         if (this.gotError || this.props.addressError) {
-            return this.showErrorMessage()
+            return this.showErrorMessage();
         }
-        return this.props.children
+        return this.props.children;
     }
 }
 

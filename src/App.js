@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by';
 
-// import logo from './logo.svg'
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
-import MapErrorBoundary from './components/MapErrorBoundary'
-import Map from './components/Map'
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import MapErrorBoundary from './components/MapErrorBoundary';
+import Map from './components/Map';
+import Footer from './components/Footer';
+import AddressSearch from './components/AddressSearch';
+import AddressErrorBoundary from './components/AddressErrorBoundary';
 
-import './css/App.css'
+import './css/App.css';
 
 // Insert here your Foursquare API key
 const foursquare = require('react-foursquare')({
@@ -124,15 +126,17 @@ class App extends Component {
   * from user's input (AddressSearch.js)
   */
   updateLocation = (address) => {
-    this.setState({ 
-      location: address
-    });
+    if (address) {
+      this.setState({ 
+        location: address
+      });
 
-    // Clear venue list
-    this.clearVenues();
+      // Clear venue list
+      this.clearVenues();
 
-    // Generate venue list for the new location
-    this.getVenues(this.state.location);
+      // Generate venue list for the new location
+      this.getVenues(this.state.location);
+    } 
   }
 
 
@@ -144,6 +148,9 @@ class App extends Component {
     this.setState({
       selectedVenue: venue,
     });
+    if (this.state.sidebarVisible) {
+      this.toggleSidebarVisibility();
+    }
   }
 
 
@@ -169,7 +176,15 @@ class App extends Component {
 
 
   toggleSidebarVisibility = () => {
-    this.setState({ sidebarVisible: !this.state.sidebarVisible});
+    this.setState({sidebarVisible: !this.state.sidebarVisible})
+    
+    let sidebar = document.querySelector('.sidebar-navigation');
+
+    if (this.state.sidebarVisible) {
+      sidebar.style.visibility = "hidden";
+    } else {
+      sidebar.style.visibility ="visible";
+    }
   }
 
   render() {
@@ -178,10 +193,13 @@ class App extends Component {
         <Header
           toggleSidebarVisibility = {this.toggleSidebarVisibility}
         />
-        
+        <AddressErrorBoundary addressError={this.props.addressError}>
+                    <AddressSearch 
+                        updateLocation = {this.updateLocation}
+                        toggleSidebarVisibility = {this.toggleSidebarVisibility}
+                    />
+                </AddressErrorBoundary>
         <Sidebar
-          sidebarVisible = {this.state.sidebarVisible}
-
           location = {this.state.location}
           updateLocation = {this.updateLocation}
           addressError = {this.state.addressError}
@@ -192,6 +210,7 @@ class App extends Component {
           updateFilter = {this.updateFilter}
           toggleInfo = {this.toggleInfo}
           venuesError = {this.state.venuesError}
+          toggleSidebarVisibility = {this.toggleSidebarVisibility}
         />
         <MapErrorBoundary mapsError = {this.state.mapsError}>
           <Map
@@ -205,7 +224,7 @@ class App extends Component {
           />
         </MapErrorBoundary>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     )
   }

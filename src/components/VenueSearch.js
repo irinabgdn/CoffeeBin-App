@@ -1,16 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import VenueErrorBoundary from '../components/VenueErrorBoundary'
-import VenuesList from '../components/VenuesList'
+import VenueErrorBoundary from '../components/VenueErrorBoundary';
+import VenuesList from '../components/VenuesList';
 
 const VenueSearch = props =>
-    <nav className="navigation">
+    <div className="venue-search-container">
         <div role="search">
             <label htmlFor="cafe-filter">Filter cafés</label>
             <input 
                 type="text"
-                className="cafe-filter-input"
+                className="search-input"
                 name="cafe-filter"
                 tabIndex="1"
                 placeholder="Filter cafés"
@@ -22,9 +22,10 @@ const VenueSearch = props =>
             <VenuesList
                 venues = {props.filteredVenues}
                 toggleInfo = {props.toggleInfo}
+                
             />
         </VenueErrorBoundary>
-    </nav>
+    </div>
 
 VenueSearch.propTypes = {
     venues: PropTypes.array.isRequired,

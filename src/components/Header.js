@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 
 const Header = props =>
     <header className="header">
-        <div className="app-name">
-            <img src={logo} className="app-logo" width="48px" height="48px" alt="CoffeBin Logo"/>
-            <h1 className="app-title">CoffeeBin</h1>
-        </div>
-        <button className="btn" type="button"
-                aria-label="Menu" aria-controls="navigation" aria-expanded={true/false}
-                onClick={props.toggleSidebarVisibility}>
-            <i className="fa fa-bars"></i>
+        <button className="btn" type="button" role="navigation"
+                aria-label="Menu" aria-controls="navigation" aria-expanded={true/false} tabIndex="o"
+                onClick={props.toggleSidebarVisibility}
+                onKeyPress={props.toggleNavVisibility}>
+            <i className="fa fa-search"></i>
         </button>
+        <div className="app-name">
+            <h1 className="app-title">CoffeeBin</h1>
+            <img src={logo} className="app-logo" width="48px" height="48px" alt="CoffeBin Logo"/>
+        </div>
     </header>
 
 Header.propTypes = {

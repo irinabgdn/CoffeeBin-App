@@ -13,8 +13,8 @@ import {
 
 const Map = compose(
     withProps({
-        loadingElement: <div style={{ height: `100vh` }} />,
-        containerElement: <div style={{ height: `100vh` }} />,
+        loadingElement: <div style={{ height: `84vh` }} />,
+        containerElement: <div style={{ height: `84vh` }} />,
         mapElement: <div style={{ height: `100%` }} />
     }),
     withGoogleMap
@@ -35,9 +35,7 @@ const Map = compose(
                     position={{lat: Number(venue.location.lat), lng: Number(venue.location.lng)}}
                     title={venue.name}
                     defaultAnimation= {google.maps.Animation.DROP}
-                    onClick={() => props.toggleInfo(venue)}
-                    
-                    
+                    onClick={() => props.toggleInfo(venue)}                    
                 >
                 
                 {props.selectedVenue.id === venue.id &&
@@ -45,7 +43,7 @@ const Map = compose(
                         onCloseClick={() => props.toggleInfo(venue)}>
                        
                         <div className="info-window" tabIndex="0">
-                            <h1>{venue.name}</h1>
+                            <h2>{venue.name}</h2>
                             <p>{venue.description}</p>
                             {/* <img></img> */}
                             <p>{venue.location.address}</p>  

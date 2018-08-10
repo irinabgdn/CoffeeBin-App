@@ -1,7 +1,39 @@
-.App {
-  text-align: center;
+* {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+label,
+.geosuggest-label {
+  display: none;
+}
+
+.App {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'PT Sans', sans-serif;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+
+h2 {
+  font-size: 1.1em;
+}
+
+p {
+  font-size: 0.95em;
+}
+
+.error-container {
+  width: 80%;
+  width-margin-top: 5em;
+  width-position: relative;
+  text-align: left;
+  text-align-padding: 1em;
 }
 
 .header {
@@ -12,6 +44,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   background-color: #d9dee5;
+  height: 10vh;
   padding: 0.2em;
 }
 
@@ -25,13 +58,13 @@
   height: 48px;
   width: 48px;
   margin: auto;
-  margin-left: 0.5em;
+  margin-right: 0.8em;
 }
 
 .header .app-name .app-title {
   font-size: 1.5em;
-  margin-bottom: 0;
-  margin-left: 0.5em;
+  margin: auto;
+  margin-right: 0.8em;
   color: #5b493d;
 }
 
@@ -39,11 +72,179 @@
   padding: 0.2em;
   position: relative;
   border: none;
-  font-size: 36px;
   color: #c9985e;
+  margin-left: 0.8em;
 }
 
 .header .btn:hover {
   cursor: pointer;
+}
+
+.header .btn .fa {
+  font-size: 36px;
+}
+
+.geosuggest {
+  position: absolute;
+  z-index: 8;
+  max-height: 25em;
+  width: 100%;
+}
+
+.geosuggest input {
+  width: 100%;
+  margin-top: 0.5em;
+  border: 2px solid transparent;
+  -webkit-box-shadow: 0 0 1px #5b493d;
+          box-shadow: 0 0 1px #5b493d;
+  padding: .5em 1em;
+  -webkit-transition: border 0.2s, box-shadow 0.2s;
+  -webkit-transition-transition: border 0.2s, box-shadow 0.2s;
+}
+
+.geosuggest .geosuggest__input:focus {
+  border-color: #c9985e;
+  -webkit-box-shadow: 0 0 0 transparent;
+          box-shadow: 0 0 0 transparent;
+}
+
+.geosuggest .geosuggest__suggests {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 25em;
+  padding: 0;
+  margin-top: -1px;
+  background: #fff;
+  border: 2px solid #c9985e;
+  border-top-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+  z-index: 5;
+  -webkit-transition: max-height 0.2s, border 0.2s;
+  -webkit-transition-transition: max-height 0.2s, border 0.2s;
+}
+
+.geosuggest .geosuggest__suggests--hidden {
+  max-height: 0;
+  overflow: hidden;
+  border-width: 0;
+}
+
+.geosuggest .geosuggest__item {
+  font-size: 18px;
+  font-size: 1rem;
+  padding: .5em .65em;
+  cursor: pointer;
+}
+
+.geosuggest .geosuggest__item:hover,
+.geosuggest .geosuggest__item:focus {
+  background: #abb7c9;
+}
+
+.geosuggest .geosuggest__item--active {
+  background: #c9985e;
+  color: #fff;
+}
+
+.geosuggest .geosuggest__item--active:hover,
+.geosuggest .geosuggest__item--active:focus {
+  background: #d9dee5;
+}
+
+.geosuggest .geosuggest__item__matched-text {
+  font-weight: bold;
+}
+
+.sidebar-navigation {
+  z-index: 10;
+  height: 84vh;
+  width: 80vw;
+  margin: auto;
+  position: absolute;
+  background-color: #455557;
+  color: #d9dee5;
+  -webkit-transition: width 0.3s ease-in;
+  transition: width 0.3s ease-in;
+  visibility: hidden;
+}
+
+.venue-search-container input {
+  width: 90%;
+  margin: auto;
+  margin-top: 0.5em;
+  border: 2px solid transparent;
+  -webkit-box-shadow: 0 0 1px #5b493d;
+          box-shadow: 0 0 1px #5b493d;
+  padding: .5em 1em;
+  -webkit-transition: border 0.2s, box-shadow 0.2s;
+  -webkit-transition-transition: border 0.2s, box-shadow 0.2s;
+}
+
+.venue-search-container input:focus {
+  border-color: #c9985e;
+  -webkit-box-shadow: 0 0 0 transparent;
+          box-shadow: 0 0 0 transparent;
+}
+
+.venue-search-container .venue-list-content {
+  height: 70vh;
+  padding: 0.5em;
+  list-style-type: none;
+  margin: 0;
+  margin-top: 0.5em;
+  overflow-y: scroll;
+}
+
+.venue-search-container .venue-name {
+  font-size: 0.95em;
+  line-height: 1;
+  margin: 0;
+}
+
+.venue-search-container .venue-name:hover, .venue-search-container .venue-name:focus {
+  cursor: pointer;
+}
+
+footer {
+  width: 100vw;
+  height: 6vh;
+  background-color: #d9dee5;
+  color: #5b493d;
+  text-align: center;
+  padding: 2px;
+}
+
+footer p {
+  font-size: 0.5em;
+}
+
+@media only screen and (max-device-width: 767px) and (orientation: landscape) {
+  .sidebar-navigation {
+    width: 50vw;
+  }
+  .geosuggest {
+    right: 1em;
+    width: 50vw;
+  }
+}
+
+@media screen and (min-device-width: 768px) {
+  .sidebar-navigation {
+    width: 30vw;
+  }
+  .geosuggest {
+    right: 1em;
+    width: 40vw;
+  }
+}
+
+@media screen and (min-device-width: 1024px) {
+  .sidebar-navigation {
+    width: 20vw;
+  }
 }
 /*# sourceMappingURL=App.css.map */

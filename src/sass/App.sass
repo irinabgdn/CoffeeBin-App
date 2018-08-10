@@ -1,21 +1,56 @@
+// Color palette
 $p-dark: #5b493d
 $p-medium: #c9985e
-$p-light: #eaceaf
-$s-dark: #5b7173
+$p-light: #e2d7c6
+$s-dark: #455557
 $s-medium: #abb7c9
 $s-light: #d9dee5
-    
-.App 
-    text-align: center
+
+// Font sizes  
+$large: 1.5em
+$medium: 1.1em
+$small: 0.95em
+
+// General styles
+*
     box-sizing: border-box
 
+label, 
+.geosuggest-label
+    display: none
+
+.App 
+    text-align: center
+    height: 100vh
+    width: 100vw
+    font-family: 'PT Sans', sans-serif
+
+h1 
+    font-size: $large
+    font-weight: bolder
+
+h2 
+    font-size: $medium
+
+p 
+    font-size: $small
+
+.error-container    
+	width: 80%
+    margin-top: 5em
+    position: relative
+	text-align: left
+    padding: 1em
+
+
+// Header styles
 .header 
     display: -webkit-box
     display: -ms-flexbox
     display: flex
     justify-content: space-between
     background-color: $s-light
-    // height: 48px
+    height: 10vh
     padding: 0.2em
     
     .app-name
@@ -23,24 +58,171 @@ $s-light: #d9dee5
         .app-logo 
             height: 48px
             width: 48px
-            margin: auto
-            margin-left: 0.5em
+            margin: auto            
+            margin-right: 0.8em
 
         .app-title 
-            font-size: 1.5em
-            margin-bottom: 0
-            margin-left: 0.5em
+            font-size: $large
+            margin: auto
+            // margin-bottom: 0
+            margin-right: 0.8em
             color: $p-dark
 
     .btn
         padding: 0.2em
         position: relative
         border: none
-        font-size: 36px
         color: $p-medium
+        margin-left: 0.8em
+
         &:hover
             cursor: pointer
+        
+        .fa
+            font-size: 36px
+
+
+// Address search styles
+
+.geosuggest
+    position: absolute
+    z-index: 8
+    max-height: 25em
+    width: 100%
+
+    input
+        width: 100%
+        margin-top: 0.5em
+        border: 2px solid transparent
+        box-shadow: 0 0 1px $p-dark
+        padding: .5em 1em
+        -webkit-transition: border 0.2s, box-shadow 0.2s
+            transition: border 0.2s, box-shadow 0.2s
+    .geosuggest__input:focus 
+        border-color: $p-medium
+        box-shadow: 0 0 0 transparent
+
+    .geosuggest__suggests 
+        position: absolute
+        top: 100%
+        left: 0
+        right: 0
+        max-height: 25em
+        padding: 0
+        margin-top: -1px
+        background: #fff
+        border: 2px solid $p-medium
+        border-top-width: 0
+        overflow-x: hidden
+        overflow-y: auto
+        list-style: none
+        z-index: 5
+        -webkit-transition: max-height 0.2s, border 0.2s
+            transition: max-height 0.2s, border 0.2s
+
+    .geosuggest__suggests--hidden 
+        max-height: 0
+        overflow: hidden
+        border-width: 0
+
+    .geosuggest__item 
+        font-size: 18px
+        font-size: 1rem
+        padding: .5em .65em
+        cursor: pointer
+
+    .geosuggest__item:hover,
+    .geosuggest__item:focus 
+        background: $s-medium
+
+    .geosuggest__item--active 
+        background: $p-medium
+        color: #fff
+
+    .geosuggest__item--active:hover,
+    .geosuggest__item--active:focus 
+        background: $s-light
+
+    .geosuggest__item__matched-text
+        font-weight: bold
+
+// Sidebar styles
+.sidebar-navigation
+    z-index: 10
+    height: 84vh
+    width: 80vw
+    margin: auto
+    position: absolute
+    background-color: $s-dark
+    color: $s-light
+    transition: width 0.3s ease-in
+    visibility: hidden
+
+// Venues search styles
+.venue-search-container
+    input
+        width: 90%
+        margin: auto
+        margin-top: 0.5em
+        border: 2px solid transparent
+        box-shadow: 0 0 1px $p-dark
+        padding: .5em 1em
+        -webkit-transition: border 0.2s, box-shadow 0.2s
+            transition: border 0.2s, box-shadow 0.2s
+        &:focus 
+            border-color: $p-medium
+            box-shadow: 0 0 0 transparent
+
+    .venue-list-content
+        height: 70vh
+        padding: 0.5em
+        list-style-type: none
+        margin: 0
+        margin-top: 0.5em
+        overflow-y: scroll
+
+    .venue-name
+        font-size: $small
+        line-height: 1
+        margin: 0
+
+        &:hover,
+        &:focus
+            cursor: pointer
+            box-shadow: 
 
 
 
+footer
+    width: 100vw
+    height: 6vh
+    background-color: $s-light
+    color: $p-dark
+    text-align: center
+    padding: 2px
+    p 
+        font-size: 0.5em
+
+@media only screen and (max-device-width: 767px) and (orientation: landscape)
+    .sidebar-navigation
+        width: 50vw
+    
+    .geosuggest
+        right: 1em
+        width: 50vw
+
+
+@media screen and (min-device-width: 768px)
+    $large: 2.5em
+
+    .sidebar-navigation
+        width: 30vw
+
+    .geosuggest
+        right: 1em
+        width: 40vw
+
+@media screen and (min-device-width: 1024px)
+    .sidebar-navigation
+        width: 20vw
 

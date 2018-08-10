@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const Footer = props =>
     <footer className="App-footer">
         <div className="credentials">
-            <p></p>
+            <p>2018 Irina Bogdan</p>
         </div>
     </footer>
+    
+export default Footer

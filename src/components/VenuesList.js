@@ -1,26 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import Venue from '../components/Venue'
+import Venue from '../components/Venue';
 
 const VenuesList = (props) => (
-    <div className="venue-list-container">
-        <div className="venue-list-title">
-            <h2>Your search results</h2>
-        </div>
-
+    // <div className="venue-list-container">
         <ul className="venue-list-content">
             {props.venues
                 .map(venue => (
                     <li key={venue.id}>
                         <Venue 
                             venue = {venue}
-                            toggleInfo= {props.toggleInfo}
+                            toggleInfo= {props.toggleInfo}                            
                         />
                     </li>
                 ))}
         </ul>
-    </div>
+    // </div>
 )
 
 VenuesList.propTypes = {
