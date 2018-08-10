@@ -20,6 +20,8 @@ class AddressSearch extends Component {
                     className="geo-suggest"
                     inputClassName="search-input"
                     label="Search cities"
+                    role="search"
+                    tabIndex="0"
                     id="addres-search"
                     type="(cities)"
                     onSuggestSelect= {(suggest) => {

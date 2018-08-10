@@ -8,7 +8,8 @@ const VenuesList = (props) => (
         <ul className="venue-list-content">
             {props.venues
                 .map(venue => (
-                    <li key={venue.id}>
+                    <li key={venue.id} 
+                        tabIndex="-1">
                         <Venue 
                             venue = {venue}
                             toggleInfo= {props.toggleInfo}                            

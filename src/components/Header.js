@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 
 const Header = props =>
     <header className="header">
-        <button className="btn" type="button" role="navigation"
-                aria-label="Menu" aria-controls="navigation" aria-expanded={true/false} tabIndex="o"
+        <button className="btn" type="button"
+                aria-label="Click to toggle cafe filter"
+                tabIndex="0" 
+                aria-controls="navigation" 
+                aria-haspopup="listbox"
                 onClick={props.toggleSidebarVisibility}
                 onKeyPress={props.toggleNavVisibility}>
             <i className="fa fa-search"></i>

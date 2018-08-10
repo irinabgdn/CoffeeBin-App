@@ -10,9 +10,10 @@ const VenueSearch = props =>
             <label htmlFor="cafe-filter">Filter cafés</label>
             <input 
                 type="text"
-                className="search-input"
+                role="search"
+                className="address-search-input"
                 name="cafe-filter"
-                tabIndex="1"
+                tabIndex="-1"
                 placeholder="Filter cafés"
                 value= {props.query}
                 onChange= {(e) => props.updateFilter(e.target.value)}
@@ -21,8 +22,7 @@ const VenueSearch = props =>
         <VenueErrorBoundary venuesError={props.venuesError}>
             <VenuesList
                 venues = {props.filteredVenues}
-                toggleInfo = {props.toggleInfo}
-                
+                toggleInfo = {props.toggleInfo}                
             />
         </VenueErrorBoundary>
     </div>

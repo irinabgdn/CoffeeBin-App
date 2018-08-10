@@ -19,6 +19,14 @@ const foursquare = require('react-foursquare')({
   clientSecret: '2FPVGCFNUYX3KJUVSYC2UZABT2RYUFUSYPJV1BQYFUVS3LBW'
 })
 
+// // A11y
+// // Define values for keycodes
+// var VK_ENTER      = 13;
+// var VK_SPACE      = 32;
+// var VK_LEFT       = 37;
+// var VK_UP         = 38;
+// var VK_RIGHT      = 39;
+// var VK_DOWN       = 40;
 
 class App extends Component {
   state = {
@@ -41,7 +49,7 @@ class App extends Component {
     mapsError: false
   }
 
-    
+
   componentWillMount() {
     this.getLocation();
   }
@@ -148,6 +156,7 @@ class App extends Component {
     this.setState({
       selectedVenue: venue,
     });
+
     if (this.state.sidebarVisible) {
       this.toggleSidebarVisibility();
     }
@@ -179,7 +188,7 @@ class App extends Component {
     this.setState({sidebarVisible: !this.state.sidebarVisible})
     
     let sidebar = document.querySelector('.sidebar-navigation');
-
+  
     if (this.state.sidebarVisible) {
       sidebar.style.visibility = "hidden";
     } else {

@@ -29,7 +29,7 @@ const Map = compose(
     >
 
         {props.isMarkerShown && props.venues.map(venue => {
-            return (                
+            return (              
                 <Marker 
                     key={venue.id}
                     position={{lat: Number(venue.location.lat), lng: Number(venue.location.lng)}}
@@ -37,13 +37,13 @@ const Map = compose(
                     defaultAnimation= {google.maps.Animation.DROP}
                     onClick={() => props.toggleInfo(venue)}                    
                 >
-                
+                {/* Show infowindow for the user's selected venue */}
                 {props.selectedVenue.id === venue.id &&
                     <InfoWindow
                         onCloseClick={() => props.toggleInfo(venue)}>
                        
                         <div className="info-window" tabIndex="0">
-                            <h2>{venue.name}</h2>
+                            <h2 className="venue-name-title">{venue.name}</h2>
                             <p>{venue.description}</p>
                             {/* <img></img> */}
                             <p>{venue.location.address}</p>  
