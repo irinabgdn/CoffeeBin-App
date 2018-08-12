@@ -12,7 +12,7 @@
 ## Description
 This is a React project from [Udacity](www.udacity.com)'s FrontEnd Web Development nanodegree, a scholarship course offered by Google. 
 
-CoffeeBin App shows on the map the best 30 cafés from the user's location or a searched location, based on Foursquare recommendations. It allows the user to filter the shown cafés and displays their name and address.
+CoffeeBin App shows on the map the best 30 cafés from the user's location or a searched location, based on Foursquare recommendations. It allows the user to filter the shown cafés and displays their name and address in the map infowindow.
 
 ## Prerequisites
 To install the project you need [npm](https://www.npmjs.com/get-npm) installed. 
