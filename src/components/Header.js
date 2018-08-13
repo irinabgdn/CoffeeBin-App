@@ -1,6 +1,7 @@
 import React from 'react';
-import logo from '../img/coffeebinlogo.svg';
 import PropTypes from 'prop-types';
+
+import logo from '../img/coffeebinlogo.svg';
 
 const Header = props =>
     <header className="header">
